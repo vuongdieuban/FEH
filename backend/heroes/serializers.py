@@ -15,10 +15,10 @@ class HeroStatSerializer(serializers.ModelSerializer):
 
 
 class HeroesSerializer(serializers.ModelSerializer):
-    types = HeroTypeSerializer(many=True)
+    types = HeroTypeSerializer(read_only=True)
     stats = HeroStatSerializer(read_only=True)
 
     class Meta:
         model = Heroes
-        fields = ("name", "types", "stats")
+        fields = ("id", "name", "types", "stats", "image")
 

@@ -4,8 +4,9 @@ from django.db import models
 class Heroes(models.Model):
 
     name = models.CharField(max_length=50, unique=True)
-    types = models.ManyToManyField("HeroType")
+    types = models.ForeignKey("HeroType", on_delete=models.CASCADE)
     stats = models.OneToOneField("HeroStat", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="images")
 
     def __str__(self):
         return self.name
@@ -15,8 +16,8 @@ class Heroes(models.Model):
 
 
 class HeroType(models.Model):
-    movement = models.CharField(max_length=20)
     weapon = models.CharField(max_length=20)
+    movement = models.CharField(max_length=20)
 
     def __str__(self):
         return f"{self.movement} - {self.weapon}"
