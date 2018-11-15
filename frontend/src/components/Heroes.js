@@ -6,6 +6,8 @@ class Heroes extends Component {
     state = {
         hero_detail: [],
         hero_summary: [],
+        hero_loaded: [],
+        search: '',
     }
 
     // Get Heroes (full detail) when fill in search form
@@ -33,6 +35,21 @@ class Heroes extends Component {
     }
 
 
+    searchListHeroes = async (e) => {
+        e.preventDefault();
+        const heroName = e.target.elements.heroesName.value
+        const api_call = await fetch(`http://127.0.0.1:8000/?q=${heroName}`);
+        const data = await api_call.json();
+        let hero_summary = data.map((hero) => {
+            return hero
+        })
+        this.setState({
+            hero_summary: hero_summary
+        })
+        console.log(this.state.hero_summary)
+
+    }
+
     componentDidMount() {
         this.getListHeroes()
     }
@@ -40,19 +57,19 @@ class Heroes extends Component {
     render() {
         return (
             <div>
-                <Form getHeroes={this.getHeroes} />
+                <Form getHeroes={this.searchListHeroes} />
                 <div className='container'>
                     <div className='row'>
                         {this.state.hero_summary && this.state.hero_summary.map((hero) => {
                             return (
-                                <div className='col-md-4' key={hero.id}>
-                                    <div className='recipes__box'>
-                                        <img className='recipes__box-img'
+                                <div className='col-md-3' key={hero.id} style={{ marginTop: '2rem' }}>
+                                    <div className='heroes__box'>
+                                        <img className='heroes__box-img'
                                             src={hero.image}
                                             alt={hero.name} />
                                     </div>
-                                    <div className='recipes__text'>
-                                        <h5 className='recipes__title'>
+                                    <div className='heroes__text'>
+                                        <h5 className='heroes__title'>
                                             {hero.name}
                                         </h5>
                                     </div>
@@ -67,7 +84,3 @@ class Heroes extends Component {
 }
 
 export default Heroes
-
-// Hero Name: {hero.name} <br />
-// <img src={hero.image}
-//     alt={hero.name} />
