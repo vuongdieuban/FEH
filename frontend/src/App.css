@@ -114,11 +114,12 @@ body {
   
   .active-hero {
     margin: 0 auto;
-    width: 60%;
+    width: 50%;
   }
   
   .active-hero__img {
-    height: 500px !important;
+    height: 300px !important;
+    margin-top: 50px;
   }
   
   .active-hero__title {
@@ -143,4 +144,8 @@ body {
     font-size: 1rem;
     text-transform: uppercase;
     font-weight: 500;
+  }
+
+  ul {
+    list-style-type: none;
   }
