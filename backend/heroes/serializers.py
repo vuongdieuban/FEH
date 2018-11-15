@@ -22,3 +22,10 @@ class HeroesSerializer(serializers.ModelSerializer):
         model = Heroes
         fields = ("id", "name", "types", "stats", "image")
 
+
+class HeroesSummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Heroes
+        fields = ("id", "name", "image")
+
+

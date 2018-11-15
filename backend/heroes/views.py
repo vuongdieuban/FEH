@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from rest_framework import generics, mixins
 from .models import Heroes
-from .serializers import HeroesSerializer
+from .serializers import HeroesSerializer, HeroesSummarySerializer
 
 # Create your views here.
 class HeroesListView(generics.ListCreateAPIView):
@@ -20,3 +20,7 @@ class HeroesListView(generics.ListCreateAPIView):
                 | Q(types__movement__icontains=query)
             ).distinct()
         return qs
+
+class HeroesSummaryListView(generics.ListAPIView):
+    serializer_class = HeroesSummarySerializer
+    queryset = Heroes.objects.all()
