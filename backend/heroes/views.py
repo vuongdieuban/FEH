@@ -16,8 +16,8 @@ class HeroesListView(generics.ListCreateAPIView):
         if query is not None:
             qs = qs.filter(
                 Q(name__icontains=query)
-                | Q(types__weapon__icontains=query)
-                | Q(types__movement__icontains=query)
+                | Q(weapon__weapon__icontains=query)
+                | Q(movement__movement__icontains=query)
             ).distinct()
         return qs
 

@@ -1,11 +1,5 @@
 from rest_framework import serializers
-from .models import Heroes, HeroType, HeroStat
-
-
-class HeroTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = HeroType
-        fields = ("movement", "weapon")
+from .models import Heroes, HeroWeapon, HeroMovement, HeroStat
 
 
 class HeroStatSerializer(serializers.ModelSerializer):
@@ -15,12 +9,13 @@ class HeroStatSerializer(serializers.ModelSerializer):
 
 
 class HeroesSerializer(serializers.ModelSerializer):
-    types = HeroTypeSerializer(read_only=True)
+    movement = serializers.StringRelatedField(read_only=True)
+    weapon = serializers.StringRelatedField(read_only=True)
     stats = HeroStatSerializer(read_only=True)
 
     class Meta:
         model = Heroes
-        fields = ("id", "name", "types", "stats", "image")
+        fields = ("id", "name", "movement", "weapon", "stats", "image")
 
 
 class HeroesSummarySerializer(serializers.ModelSerializer):

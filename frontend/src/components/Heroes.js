@@ -10,9 +10,10 @@ class Heroes extends Component {
         search: '',
     }
 
+
     // Get Heroes(summary - name and img) immediately when the page loaded
     getListHeroes = async () => {
-        const api_call = await fetch(`http://127.0.0.1:8000/`)
+        const api_call = await fetch(`http://127.0.0.1:8000/`);
         const data = await api_call.json();
         let heroes = data.map((hero) => {
             return hero
@@ -20,14 +21,14 @@ class Heroes extends Component {
         this.setState({
             heroes: heroes
         })
-        console.log(this.state.heroes)
+        console.log(this.state.heroes);
     }
 
 
-    // Search from the list on ListView
+    // Search Individual from the list on ListView by sending request
     searchListHeroes = async (e) => {
         e.preventDefault();
-        const heroName = e.target.elements.heroesName.value
+        const heroName = e.target.elements.heroesName.value;
         const api_call = await fetch(`http://127.0.0.1:8000/?q=${heroName}`);
         const data = await api_call.json();
         let heroes = data.map((hero) => {
@@ -36,12 +37,31 @@ class Heroes extends Component {
         this.setState({
             heroes: heroes
         })
-        console.log(this.state.heroes)
+        console.log(this.state.heroes);
+    }
+
+    // Filter Search from List View
+    filterListHeroes(e) {
+        const current_string = e.target.elements.heroesName.value.substr(0, 20);
+        this.setState({
+            search: current_string
+        })
 
     }
 
     componentDidMount() {
-        this.getListHeroes()
+        const json = localStorage.getItem('heroes');    //get the previous state before update
+        const heroes = JSON.parse(json);
+        //handle beginning case (empty local storage)where there are no heroes yet, get all heroes
+        if (heroes == null) {
+            this.getListHeroes();
+        }
+        else { this.setState({ heroes: heroes }) } //load the previous state
+    }
+
+    componentDidUpdate = () => {
+        const heroes = JSON.stringify(this.state.heroes);
+        localStorage.setItem('heroes', heroes); //save the state immediately after update(reload the page)
     }
 
     render() {
