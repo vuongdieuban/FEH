@@ -3,8 +3,9 @@ from django.db import models
 # Create your models here.
 class Heroes(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    weapon = models.ForeignKey("HeroWeapon", on_delete=models.CASCADE)
-    movement = models.ForeignKey("HeroMovement", on_delete=models.CASCADE)
+    # weapon = models.ForeignKey("HeroWeapon", on_delete=models.CASCADE)
+    # movement = models.ForeignKey("HeroMovement", on_delete=models.CASCADE)
+    type = models.ForeignKey("HeroType", on_delete=models.CASCADE, null=True)
     stats = models.OneToOneField("HeroStat", on_delete=models.CASCADE)
     image = models.ImageField(upload_to="images")
 
@@ -13,6 +14,14 @@ class Heroes(models.Model):
 
     class Meta:
         verbose_name_plural = "Heroes"
+
+
+class HeroType(models.Model):
+    weapon = models.ForeignKey("HeroWeapon", on_delete=models.CASCADE)
+    movement = models.ForeignKey("HeroMovement", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.movement}-{self.weapon}'
 
 
 class HeroWeapon(models.Model):

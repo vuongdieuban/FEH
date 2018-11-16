@@ -61,8 +61,10 @@ class Hero extends Component {
                                 <div className='active-hero'>
                                     <div className="active-hero__img-container">
                                         <img className='active-hero__img' src={activeHero.image} alt={activeHero.name} />
-                                        <img className='active-hero__movement' src={`https://fireemblem.gamepress.gg/sites/fireemblem/files/2017-02/Icon_Move_${activeHero.movement}.png`}
-                                            atl="new" />
+                                        <img className='active-hero__movement' src={`https://fireemblem.gamepress.gg/sites/fireemblem/files/2017-02/Icon_Move_${activeHero.type.movement}.png`}
+                                            atl={`${activeHero.type.movement}`} />
+                                        <img className='active-hero__weapon' src={`https://fireemblem.gamepress.gg/sites/fireemblem/files/2017-05/Icon_Class_${activeHero.type.weapon}.png`}
+                                            atl={`${activeHero.type.weapon}`} />
                                     </div>
                                     <h3 className='active-hero__title'> {activeHero.name}</h3>
                                 </div>

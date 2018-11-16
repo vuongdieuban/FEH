@@ -130,6 +130,11 @@ body {
     width: 5%;
     height: 5%;
   }
+
+  .active-hero__weapon {
+    width: 5%;
+    height: 5%;
+  }
   
   .active-hero__title {
     text-transform: uppercase;
