@@ -6,7 +6,6 @@ import Form from './Form'
 class Heroes extends Component {
     state = {
         heroes: [],
-        hero_loaded: [],
         search: '',
     }
 
@@ -25,24 +24,9 @@ class Heroes extends Component {
     }
 
 
-    // Search Individual from the list on ListView by sending request
-    searchListHeroes = async (e) => {
-        e.preventDefault();
-        const heroName = e.target.elements.heroesName.value;
-        const api_call = await fetch(`http://127.0.0.1:8000/?q=${heroName}`);
-        const data = await api_call.json();
-        let heroes = data.map((hero) => {
-            return hero
-        })
-        this.setState({
-            heroes: heroes
-        })
-        console.log(this.state.heroes);
-    }
-
     // Filter Search from List View
     filterListHeroes(e) {
-        const current_string = e.target.elements.heroesName.value.substr(0, 20);
+        const current_string = e.target.value.substr(0, 20);
         this.setState({
             search: current_string
         })
@@ -65,12 +49,19 @@ class Heroes extends Component {
     }
 
     render() {
+        let filteredHeroes = this.state.heroes.filter(
+            (hero) => {
+                return (
+                    hero.name.toLowerCase().slice(0, this.state.search.length) === this.state.search.toLowerCase()
+                );
+            }
+        );
         return (
             <div>
-                <Form getHeroes={this.searchListHeroes} />
+                < Form filterHeroes={this.filterListHeroes.bind(this)} value={this.state.search} />
                 <div className='container'>
                     <div className='row'>
-                        {this.state.heroes && this.state.heroes.map((hero) => {
+                        {filteredHeroes && filteredHeroes.map((hero) => {
                             return (
                                 <div className='col-md-3' key={hero.id} style={{ marginTop: '2rem' }}>
                                     <div className='heroes__box'>
@@ -90,7 +81,7 @@ class Heroes extends Component {
                         })}
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }
