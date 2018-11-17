@@ -5,6 +5,8 @@
 __pycache__/
 local_settings.py
 static/
+images/
+db.sqlite3
 
 
 # Environments
