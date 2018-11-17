@@ -4,12 +4,13 @@
 *.pyc
 __pycache__/
 local_settings.py
-backend/images/
+backend/media
+backend/static
 backend/db.sqlite3
 
 
 # Environments
-backend/env/
+backend/env
 
 
 # Visual Studio Code
