@@ -10,7 +10,8 @@ class Hero extends Component {
     getHero = async () => {
         //get parameter:name in the url  from Router path=':/name', 'name' is set by Heroes.Js Link passed in 
         const heroName = this.props.match.params.name;
-        const api_call = await fetch(`http://127.0.0.1:8000/?q=${heroName}`);
+        //const api_call = await fetch(`http://127.0.0.1:8000/?q=${heroName}`);
+        const api_call = await fetch(`http://feh.banvuong.com/?q=${heroName}`);
         const data = await api_call.json();
         let hero = data.map((hero) => {
             return hero

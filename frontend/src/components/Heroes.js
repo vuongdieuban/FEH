@@ -12,7 +12,8 @@ class Heroes extends Component {
 
     // Get Heroes(summary - name and img) immediately when the page loaded
     getListHeroes = async () => {
-        const api_call = await fetch(`http://127.0.0.1:8000/`);
+        //const api_call = await fetch(`http://127.0.0.1:8000/`);
+        const api_call = await fetch('http://feh.banvuong.com/');
         const data = await api_call.json();
         let heroes = data.map((hero) => {
             return hero
