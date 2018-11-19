@@ -8,7 +8,7 @@
     
 ### Frontend: 
 * Fetch data from backend API  
-  * visit on heores.banvuong.com
+  * visit on heroes.banvuong.com
   * ListView, display all heroes, can search/query for individual hero  
   * DetailView, display individual heroes
   * Written in ReactJs
