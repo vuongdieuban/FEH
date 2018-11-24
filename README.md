@@ -1,7 +1,7 @@
 # Fire Emblem Heroes database  
 ### Backend:  
 * REST API, support GET request, endpoints for ListView and DetailView
-  * http://heroes.banvuong.com/ for API ListView  
+  * http://feh.banvuong.com/ for API ListView  
   * http://feh.banvuong.com//?q=look_up for query hero's name and types
   * Data returned in JSON format
   * Written in Python/Django/Django_REST  
